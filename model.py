@@ -20,7 +20,7 @@ class MultiAgentModel(Model):
             self.schedule.add(water)
 
         # Randomly locate food agents(static)
-        for _ in range(200):
+        for _ in range(2000):
             x = self.random.randrange(width)
             y = self.random.randrange(height)
             food = FoodAgent(self.next_id(), self)
