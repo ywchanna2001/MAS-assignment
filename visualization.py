@@ -1,24 +1,28 @@
 from mesa.visualization.modules import CanvasGrid
 from mesa.visualization.ModularVisualization import ModularServer
-from model import ForestModel
+from model import MultiAgentModel
+from agents import AnimalAgent, PatrolAgent, HunterAgent, FoodAgent, WaterAgent
 
 def agent_portrayal(agent):
-    portrayal = {"Layer": 1}  # Default layer for all agents
-    if isinstance(agent, AnimalAgent):
-        portrayal.update({"Shape": "circle", "Color": "green", "r": 0.5})
+    if isinstance(agent, FoodAgent):
+        return {"Shape": "rect", "Color": "lightgreen", "Filled": True, "Layer": 0, "w": 1, "h": 1}
+    elif isinstance(agent, WaterAgent):
+        return {"Shape": "rect", "Color": "lightblue", "Filled": True, "Layer": 0, "w": 1, "h": 1}
+    elif isinstance(agent, AnimalAgent):
+        return {"Shape": "circle", "Color": "black", "Filled": True, "Layer": 1, "r": 0.6}
     elif isinstance(agent, PatrolAgent):
-        portrayal.update({"Shape": "rect", "Color": "blue", "w": 0.5, "h": 0.5})
-    elif isinstance(agent, ThreatAgent):
-        portrayal.update({"Shape": "triangle", "Color": "red", "r": 0.5})
-    return portrayal
+        return {"Shape": "circle", "Color": "orange", "Filled": True, "Layer": 2, "r": 0.5}
+    elif isinstance(agent, HunterAgent):
+        return {"Shape": "circle", "Color": "red", "Filled": True, "Layer": 3, "r": 0.4}
+    return {}
 
-
-grid = CanvasGrid(agent_portrayal, 20, 20, 500, 500)
+grid = CanvasGrid(agent_portrayal, 50, 50, 500, 500)
 server = ModularServer(
-    ForestModel,
+    MultiAgentModel,
     [grid],
-    "Wildlife Conservation MAS",
-    {"width": 20, "height": 20, "num_animals": 10, "num_patrols": 3, "num_threats": 2},
+    "Multi-Agent System Simulation",
+    {"width": 50, "height": 50, "num_animals": 1, "num_patrols": 10, "num_hunters": 0},
 )
-server.port = 8521
-server.launch()
+
+
+server.port = 8527
