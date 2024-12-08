@@ -12,6 +12,7 @@ def agent_portrayal(agent):
         portrayal.update({"Shape": "triangle", "Color": "red", "r": 0.5})
     return portrayal
 
+
 grid = CanvasGrid(agent_portrayal, 20, 20, 500, 500)
 server = ModularServer(
     ForestModel,
