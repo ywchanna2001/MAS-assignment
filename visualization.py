@@ -11,9 +11,9 @@ def agent_portrayal(agent):
     elif isinstance(agent, AnimalAgent):
         return {"Shape": "circle", "Color": "black", "Filled": True, "Layer": 1, "r": 0.9}
     elif isinstance(agent, PatrolAgent):
-        return {"Shape": "circle", "Color": "orange", "Filled": True, "Layer": 2, "r": 0.9}
+        return {"Shape": "circle", "Color": "orange", "Filled": True, "Layer": 3, "r": 0.9}
     elif isinstance(agent, HunterAgent):
-        return {"Shape": "circle", "Color": "red", "Filled": True, "Layer": 3, "r": 0.9}
+        return {"Shape": "circle", "Color": "red", "Filled": True, "Layer": 2, "r": 0.9}
     return {}
 
 grid = CanvasGrid(agent_portrayal, 50, 50, 500, 500)
@@ -21,7 +21,7 @@ server = ModularServer(
     MultiAgentModel,
     [grid],
     "Multi-Agent System Simulation",
-    {"width": 50, "height": 50, "num_animals": 100, "num_patrols": 5, "num_hunters": 50},
+    {"width": 50, "height": 50, "num_animals": 0, "num_patrols": 20, "num_hunters": 1},
 )
 
 
